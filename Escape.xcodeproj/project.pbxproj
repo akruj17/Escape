@@ -16,6 +16,9 @@
 		A82250D420D4205500D80F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A82250D320D4205500D80F9F /* Assets.xcassets */; };
 		A82250D720D4205500D80F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82250D520D4205500D80F9F /* LaunchScreen.storyboard */; };
 		A82250DA20D4205500D80F9F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250D920D4205500D80F9F /* main.m */; };
+		A82250E320D4214A00D80F9F /* Shooter.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E220D4214A00D80F9F /* Shooter.m */; };
+		A82250E620D5F70300D80F9F /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E520D5F70300D80F9F /* Bullet.m */; };
+		A82250E920D61DEA00D80F9F /* Brick.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E820D61DEA00D80F9F /* Brick.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,12 @@
 		A82250D620D4205500D80F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A82250D820D4205500D80F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A82250D920D4205500D80F9F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A82250E120D4214A00D80F9F /* Shooter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Shooter.h; sourceTree = "<group>"; };
+		A82250E220D4214A00D80F9F /* Shooter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Shooter.m; sourceTree = "<group>"; };
+		A82250E420D5F70300D80F9F /* Bullet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
+		A82250E520D5F70300D80F9F /* Bullet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
+		A82250E720D61DEA00D80F9F /* Brick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brick.h; sourceTree = "<group>"; };
+		A82250E820D61DEA00D80F9F /* Brick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Brick.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +74,7 @@
 		A82250C220D4205300D80F9F /* Escape */ = {
 			isa = PBXGroup;
 			children = (
+				A82250E020D4212700D80F9F /* Entities */,
 				A82250C320D4205300D80F9F /* AppDelegate.h */,
 				A82250C420D4205300D80F9F /* AppDelegate.m */,
 				A82250C620D4205300D80F9F /* GameScene.sks */,
@@ -80,6 +90,19 @@
 				A82250D920D4205500D80F9F /* main.m */,
 			);
 			path = Escape;
+			sourceTree = "<group>";
+		};
+		A82250E020D4212700D80F9F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				A82250E120D4214A00D80F9F /* Shooter.h */,
+				A82250E220D4214A00D80F9F /* Shooter.m */,
+				A82250E420D5F70300D80F9F /* Bullet.h */,
+				A82250E520D5F70300D80F9F /* Bullet.m */,
+				A82250E720D61DEA00D80F9F /* Brick.h */,
+				A82250E820D61DEA00D80F9F /* Brick.m */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,9 +178,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A82250CC20D4205300D80F9F /* GameScene.m in Sources */,
+				A82250E920D61DEA00D80F9F /* Brick.m in Sources */,
 				A82250CF20D4205300D80F9F /* GameViewController.m in Sources */,
+				A82250E320D4214A00D80F9F /* Shooter.m in Sources */,
 				A82250DA20D4205500D80F9F /* main.m in Sources */,
 				A82250C520D4205300D80F9F /* AppDelegate.m in Sources */,
+				A82250E620D5F70300D80F9F /* Bullet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

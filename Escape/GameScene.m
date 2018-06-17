@@ -7,76 +7,68 @@
 //
 
 #import "GameScene.h"
+#import "Shooter.h"
+#import "Bullet.h"
+#import "Brick.h"
+
+@interface GameScene()<SKPhysicsContactDelegate>@end
 
 @implementation GameScene {
-    SKShapeNode *_spinnyNode;
-    SKLabelNode *_label;
+    Shooter *shooter;
+    CGPoint center;
+    float _bulletInterval;
+    CFTimeInterval _lastUpdateTime;
+    NSTimeInterval _dt;
 }
 
-- (void)didMoveToView:(SKView *)view {
-    // Setup your scene here
-    
-    // Get label node from scene and store it for use later
-    _label = (SKLabelNode *)[self childNodeWithName:@"//helloLabel"];
-    
-    _label.alpha = 0.0;
-    [_label runAction:[SKAction fadeInWithDuration:2.0]];
-    
-    CGFloat w = (self.size.width + self.size.height) * 0.05;
-    
-    // Create shape node to use during mouse interaction
-    _spinnyNode = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(w, w) cornerRadius:w * 0.3];
-    _spinnyNode.lineWidth = 2.5;
-    
-    [_spinnyNode runAction:[SKAction repeatActionForever:[SKAction rotateByAngle:M_PI duration:1]]];
-    [_spinnyNode runAction:[SKAction sequence:@[
-                                                [SKAction waitForDuration:0.5],
-                                                [SKAction fadeOutWithDuration:0.5],
-                                                [SKAction removeFromParent],
-                                                ]]];
+- (instancetype)initWithSize:(CGSize)size {
+    if (self = [super initWithSize:size]) {
+        self.physicsWorld.contactDelegate = self;
+        self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+        self.physicsBody.categoryBitMask = 1 << 0;
+        self.physicsBody.contactTestBitMask = 1 << 1;
+        center = CGPointMake(self.size.width/2, self.size.height/2);
+        
+        shooter = [[Shooter alloc] initWithSize:60];
+        shooter.position = center;
+        shooter.zPosition = 100;
+        [self addChild:shooter];
+        
+        Brick *brick = [[Brick alloc] initWithPosition:CGPointMake(100, 100)];
+        [self addChild:brick];
+    }
+    return self;
 }
 
-
-- (void)touchDownAtPoint:(CGPoint)pos {
-    SKShapeNode *n = [_spinnyNode copy];
-    n.position = pos;
-    n.strokeColor = [SKColor greenColor];
-    [self addChild:n];
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    CGPoint curr = [[touches anyObject] locationInNode:self];
+    CGFloat angle = atan2(curr.y - center.y, curr.x - center.x);
+    shooter.zRotation = angle - M_PI_2;
 }
-
-- (void)touchMovedToPoint:(CGPoint)pos {
-    SKShapeNode *n = [_spinnyNode copy];
-    n.position = pos;
-    n.strokeColor = [SKColor blueColor];
-    [self addChild:n];
-}
-
-- (void)touchUpAtPoint:(CGPoint)pos {
-    SKShapeNode *n = [_spinnyNode copy];
-    n.position = pos;
-    n.strokeColor = [SKColor redColor];
-    [self addChild:n];
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    // Run 'Pulse' action from 'Actions.sks'
-    [_label runAction:[SKAction actionNamed:@"Pulse"] withKey:@"fadeInOut"];
-    
-    for (UITouch *t in touches) {[self touchDownAtPoint:[t locationInNode:self]];}
-}
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{
-    for (UITouch *t in touches) {[self touchMovedToPoint:[t locationInNode:self]];}
-}
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
-}
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-    for (UITouch *t in touches) {[self touchUpAtPoint:[t locationInNode:self]];}
-}
-
 
 -(void)update:(CFTimeInterval)currentTime {
-    // Called before each frame is rendered
+    if (_lastUpdateTime) {
+        _dt = currentTime - _lastUpdateTime;
+    } else {
+        _dt = 0;
+    }
+    _lastUpdateTime = currentTime;
+    _bulletInterval += _dt;
+    if (_bulletInterval > 0.15) {
+        _bulletInterval = 0;
+        Bullet *bullet = [[Bullet alloc] initWithPosition:center];
+        bullet.physicsBody.velocity = CGVectorMake(120 * cos(shooter.zRotation + M_PI_2), 120 * sin(shooter.zRotation + M_PI_2));
+        [self addChild:bullet];
+    }
+}
+
+- (void)didBeginContact:(SKPhysicsContact *)contact {
+    uint32_t collision = (contact.bodyA.categoryBitMask | contact.bodyB.categoryBitMask);
+    if (collision == (1 | 2)) {
+        Bullet *bulletToRemove = (contact.bodyA.categoryBitMask == 2) ? (Bullet *)contact.bodyA.node : (Bullet *)contact.bodyB.node;
+        [bulletToRemove runAction:[SKAction sequence:@[[SKAction waitForDuration:0.3], [SKAction
+                                                                                        removeFromParent]]]];
+    }
 }
 
 @end
