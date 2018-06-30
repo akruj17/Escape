@@ -8,7 +8,8 @@
 
 #import "Shooter.h"
 
-@implementation Shooter
+@implementation Shooter {
+}
 
 - (instancetype) initWithSize:(CGFloat)size {
     if (self = [super init]) {
@@ -16,16 +17,16 @@
         SKShapeNode *circle = [SKShapeNode shapeNodeWithCircleOfRadius:size/2];
         circle.fillColor = [UIColor blueColor];
         circle.strokeColor = [UIColor blueColor];
+        circle.name = @"circle";
         [self addChild:circle];
-        //triangle portion
-        float xCoord = (size/3) / sqrt(3);
-        CGPoint trianglePoints[] = {CGPointMake(0, size/2), CGPointMake( -xCoord, (size/6)), CGPointMake(xCoord, (size/6)), CGPointMake(0, size/2)};
-        SKShapeNode *triangle = [SKShapeNode shapeNodeWithPoints: trianglePoints count:4];
-        triangle.strokeColor = [UIColor blackColor];
-        triangle.fillColor = [UIColor blackColor];
-        [self addChild:triangle];
     }
     return self;
+}
+
+- (void)changeColorTo:(UIColor *)newColor {
+    SKShapeNode *circle = (SKShapeNode *)[self childNodeWithName:@"circle"];
+    circle.fillColor = newColor;
+    circle.strokeColor = newColor;
 }
 
 

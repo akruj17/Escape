@@ -19,9 +19,16 @@
 		A82250E320D4214A00D80F9F /* Shooter.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E220D4214A00D80F9F /* Shooter.m */; };
 		A82250E620D5F70300D80F9F /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E520D5F70300D80F9F /* Bullet.m */; };
 		A82250E920D61DEA00D80F9F /* Brick.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E820D61DEA00D80F9F /* Brick.m */; };
+		A8AF64C220D9B2680079B112 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AF64C120D9B2680079B112 /* Constants.m */; };
+		A8AF64C620DC94160079B112 /* UIColor+ColorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AF64C520DC94160079B112 /* UIColor+ColorExtensions.m */; };
+		A8AF64C920DC9B760079B112 /* BrickColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AF64C820DC9B760079B112 /* BrickColors.m */; };
+		A8E9AD0E20E7F7E300E2885E /* BrickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E9AD0D20E7F7E300E2885E /* BrickManager.m */; };
+		D8D1CA288D0FD11EB51786F8 /* libPods-Escape.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		569964110429E2BF954BFD39 /* Pods-Escape.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Escape.release.xcconfig"; path = "Pods/Target Support Files/Pods-Escape/Pods-Escape.release.xcconfig"; sourceTree = "<group>"; };
+		75BF4F3E3036EF67240AF3C5 /* Pods-Escape.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Escape.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Escape/Pods-Escape.debug.xcconfig"; sourceTree = "<group>"; };
 		A82250C020D4205300D80F9F /* Escape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Escape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82250C320D4205300D80F9F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A82250C420D4205300D80F9F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -42,6 +49,15 @@
 		A82250E520D5F70300D80F9F /* Bullet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		A82250E720D61DEA00D80F9F /* Brick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brick.h; sourceTree = "<group>"; };
 		A82250E820D61DEA00D80F9F /* Brick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Brick.m; sourceTree = "<group>"; };
+		A8AF64C120D9B2680079B112 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		A8AF64C320D9B27F0079B112 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A8AF64C420DC94160079B112 /* UIColor+ColorExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorExtensions.h"; sourceTree = "<group>"; };
+		A8AF64C520DC94160079B112 /* UIColor+ColorExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorExtensions.m"; sourceTree = "<group>"; };
+		A8AF64C720DC9B760079B112 /* BrickColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrickColors.h; sourceTree = "<group>"; };
+		A8AF64C820DC9B760079B112 /* BrickColors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickColors.m; sourceTree = "<group>"; };
+		A8E9AD0D20E7F7E300E2885E /* BrickManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickManager.m; sourceTree = "<group>"; };
+		A8E9AD0F20E7F7FC00E2885E /* BrickManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrickManager.h; sourceTree = "<group>"; };
+		DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Escape.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,17 +65,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8D1CA288D0FD11EB51786F8 /* libPods-Escape.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E4FD69311D9AC179062F3DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A82250B720D4205300D80F9F = {
 			isa = PBXGroup;
 			children = (
 				A82250C220D4205300D80F9F /* Escape */,
 				A82250C120D4205300D80F9F /* Products */,
+				F094A5550BA55DA88414E6E0 /* Pods */,
+				0E4FD69311D9AC179062F3DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -88,6 +115,14 @@
 				A82250D520D4205500D80F9F /* LaunchScreen.storyboard */,
 				A82250D820D4205500D80F9F /* Info.plist */,
 				A82250D920D4205500D80F9F /* main.m */,
+				A8AF64C120D9B2680079B112 /* Constants.m */,
+				A8AF64C320D9B27F0079B112 /* Constants.h */,
+				A8AF64C420DC94160079B112 /* UIColor+ColorExtensions.h */,
+				A8AF64C520DC94160079B112 /* UIColor+ColorExtensions.m */,
+				A8AF64C720DC9B760079B112 /* BrickColors.h */,
+				A8AF64C820DC9B760079B112 /* BrickColors.m */,
+				A8E9AD0D20E7F7E300E2885E /* BrickManager.m */,
+				A8E9AD0F20E7F7FC00E2885E /* BrickManager.h */,
 			);
 			path = Escape;
 			sourceTree = "<group>";
@@ -105,6 +140,15 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
+		F094A5550BA55DA88414E6E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75BF4F3E3036EF67240AF3C5 /* Pods-Escape.debug.xcconfig */,
+				569964110429E2BF954BFD39 /* Pods-Escape.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -112,6 +156,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A82250DD20D4205500D80F9F /* Build configuration list for PBXNativeTarget "Escape" */;
 			buildPhases = (
+				63EFE2F8DD8B15BB197CBCC9 /* [CP] Check Pods Manifest.lock */,
 				A82250BC20D4205300D80F9F /* Sources */,
 				A82250BD20D4205300D80F9F /* Frameworks */,
 				A82250BE20D4205300D80F9F /* Resources */,
@@ -172,6 +217,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		63EFE2F8DD8B15BB197CBCC9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Escape-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A82250BC20D4205300D80F9F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -180,10 +246,14 @@
 				A82250CC20D4205300D80F9F /* GameScene.m in Sources */,
 				A82250E920D61DEA00D80F9F /* Brick.m in Sources */,
 				A82250CF20D4205300D80F9F /* GameViewController.m in Sources */,
+				A8AF64C220D9B2680079B112 /* Constants.m in Sources */,
 				A82250E320D4214A00D80F9F /* Shooter.m in Sources */,
 				A82250DA20D4205500D80F9F /* main.m in Sources */,
+				A8AF64C620DC94160079B112 /* UIColor+ColorExtensions.m in Sources */,
+				A8AF64C920DC9B760079B112 /* BrickColors.m in Sources */,
 				A82250C520D4205300D80F9F /* AppDelegate.m in Sources */,
 				A82250E620D5F70300D80F9F /* Bullet.m in Sources */,
+				A8E9AD0E20E7F7E300E2885E /* BrickManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +391,7 @@
 		};
 		A82250DE20D4205500D80F9F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75BF4F3E3036EF67240AF3C5 /* Pods-Escape.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -338,6 +409,7 @@
 		};
 		A82250DF20D4205500D80F9F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 569964110429E2BF954BFD39 /* Pods-Escape.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

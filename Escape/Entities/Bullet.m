@@ -7,12 +7,19 @@
 //
 
 #import "Bullet.h"
+#import "Constants.h"
 
-@implementation Bullet
+@implementation Bullet {
+    int colorIndex;
+}
 
-- (instancetype)initWithPosition:(CGPoint)position {
+static SKTexture *currTexture;
+static int currColorIndex;
+
+- (instancetype)initRegularBulletWithPosition:(CGPoint)position withColorIndex:(int)index {
     if (self = [super init]) {
-        self.texture = [[self class] generateTexture];
+        self.texture = (currTexture == nil || (currColorIndex != index)) ? [[self class] generateTextureWithIndex:(index)] : currTexture;
+        colorIndex = index;
         self.size = self.texture.size;
         self.position = position;
         self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:5];
@@ -20,25 +27,44 @@
         self.physicsBody.linearDamping = 0;
         self.physicsBody.friction = 0;
         self.physicsBody.collisionBitMask = 0;
-        self.physicsBody.categoryBitMask = 1 << 1;
-        self.physicsBody.contactTestBitMask = 1 << 0;
+        self.physicsBody.categoryBitMask = BULLET_CATEGORY_BITMASK;
+        self.physicsBody.contactTestBitMask = EDGE_CATEGORY_BITMASK | BRICK_CATEGORY_BITMASK;
     }
     return self;
 }
 
-+ (SKTexture *)generateTexture {
-    static SKTexture *texture = nil;
+- (instancetype) initMorphBulletWithPosition:(CGPoint)position withColorIndex:(int)index {
+    if (self = [super init]) {
+        self.texture = [[self class] generateTextureWithIndex:index];
+        self.size = self.texture.size;
+        self.position = position;
+    }
+    return self;
+}
+
++ (SKTexture *)generateTextureWithIndex:(int)index {
+    static NSMutableArray *textures;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         SKShapeNode *bullet = [SKShapeNode shapeNodeWithCircleOfRadius:5];
-        bullet.strokeColor = [UIColor whiteColor];
-        bullet.fillColor = [UIColor whiteColor];
-        
+        NSArray *colors = [[BrickColors sharedBrickArray] brickColors];
+        textures = [[NSMutableArray alloc] init];
         SKView *textureView = [SKView new];
-        texture = [textureView textureFromNode:bullet];
-        texture.filteringMode = SKTextureFilteringNearest;
+        SKTexture *texture = nil;
+        for (int i = 0; i < [colors count]; i++) {
+            bullet.strokeColor = [colors objectAtIndex:i];
+            bullet.fillColor = [colors objectAtIndex:i];
+            texture = [textureView textureFromNode:bullet];
+            texture.filteringMode = SKTextureFilteringNearest;
+            [textures addObject:texture];
+        }
     });
-    return texture;
+    currColorIndex = index;
+    return currTexture = [textures objectAtIndex:index];
+}
+
+- (int)getColorIndex {
+    return colorIndex;
 }
 
 

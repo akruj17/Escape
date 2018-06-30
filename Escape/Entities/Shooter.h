@@ -10,4 +10,6 @@
 
 @interface Shooter : SKShapeNode
 - (instancetype) initWithSize:(CGFloat)size;
+- (void)changeColorTo:(UIColor *)newColor;
+- (int)getColorIndex;
 @end

@@ -7,7 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "BrickColors.h"
 
 @interface Bullet : SKSpriteNode
-- (instancetype)initWithPosition:(CGPoint)position;
+- (instancetype) initRegularBulletWithPosition:(CGPoint)position withColorIndex:(int)index;
+- (instancetype) initMorphBulletWithPosition:(CGPoint)position withColorIndex:(int)index;
+- (int)getColorIndex;
 @end
