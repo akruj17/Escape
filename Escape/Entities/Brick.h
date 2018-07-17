@@ -7,10 +7,11 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "BrickColors.h"
+#import "Entity.h"
 
-@interface Brick : SKSpriteNode
-- (instancetype)initWithPosition:(CGPoint)position height:(float)height withColorIndex:(int)colorIndex;
+@interface Brick : Entity
+- (instancetype)initWithPosition:(CGPoint)position height:(float)height withColorIndex:(int)index;
 - (SKAction *)enlargeAction;
-- (int)getColorIndex;
+- (SKTexture *)getFragmentTexture;
++ (SKAction *)iterateThroughColors;
 @end

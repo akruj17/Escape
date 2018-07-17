@@ -9,46 +9,34 @@
 #import "Brick.h"
 #import "Constants.h"
 
-@implementation Brick {
-    int colorIndex;
-}
+@implementation Brick
 
-- (instancetype)initWithPosition:(CGPoint)position height:(float)height withColorIndex:(int)colorIndex {
+static BOOL generatedTextures;
+static NSArray *fragmentTextures;
+static NSArray *coloredTextures;
+static int animatingIndex;
+
+- (instancetype)initWithPosition:(CGPoint)position height:(float)height withColorIndex:(int)index {
     if (self = [super init]) {
-        self.texture = [[self class] generateTextures:colorIndex];
-        self->colorIndex = colorIndex;
-        self.size = self.texture.size;
-        [self runAction:[SKAction resizeToHeight:height duration:0.1]];
+        if (!generatedTextures) {
+            coloredTextures = [self generateTextureArrayOfShape:[SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(BRICK_WIDTH, OUTER_LAYER_VERTICAL_BRICK_HEIGHT)]];
+            fragmentTextures = [self generateTextureArrayOfShape:[SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(2, 2)]];
+            generatedTextures = YES;
+        }
+        self.colorIndex = index;
+        self.size = CGSizeMake(BRICK_WIDTH, height);
+        self.texture = [coloredTextures objectAtIndex:index];
+        [self runAction:[SKAction resizeToHeight:height duration:0]];
         self.position = position;
         self.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:CGSizeMake(BRICK_WIDTH, height)];
         self.physicsBody.affectedByGravity = NO;
         self.physicsBody.linearDamping = 0;
         self.physicsBody.friction = 0;
-        self.physicsBody.collisionBitMask = 0;
-        self.physicsBody.categoryBitMask = BRICK_CATEGORY_BITMASK;
-        self.physicsBody.contactTestBitMask = BULLET_CATEGORY_BITMASK;
+        self.physicsBody.collisionBitMask = SHOOTER;
+        self.physicsBody.categoryBitMask = BRICK;
+        self.physicsBody.contactTestBitMask = SHOOTER | BULLET;
     }
     return self;
-}
-
-+ (SKTexture *)generateTextures:(int)index {
-    static NSMutableArray *textures;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        SKShapeNode *brick = [SKShapeNode shapeNodeWithRectOfSize:CGSizeMake(BRICK_WIDTH, OUTER_LAYER_VERTICAL_BRICK_HEIGHT)];
-        NSArray *colors = [[BrickColors sharedBrickArray] brickColors];
-        textures = [[NSMutableArray alloc] init];
-        for (int i = 0; i < [colors count]; i++) {
-            brick.strokeColor = [colors objectAtIndex:i];
-            brick.fillColor = [colors objectAtIndex:i];
-            SKView *textureView = [SKView new];
-            SKTexture *texture = nil;
-            texture = [textureView textureFromNode:brick];
-            texture.filteringMode = SKTextureFilteringNearest;
-            [textures addObject:texture];
-        }
-    });
-    return (SKTexture *)[textures objectAtIndex: index];
 }
 
 - (SKAction *)enlargeAction{
@@ -61,7 +49,29 @@
 }
 
 - (int)getColorIndex {
-    return colorIndex;
+    return (int)[coloredTextures indexOfObject:self.texture];
+}
+
+- (SKTexture *)getFragmentTexture {
+    return [fragmentTextures objectAtIndex:self.colorIndex];
+}
+
++ (SKAction *)iterateThroughColors { //total frame time 7.5 seconds
+    static NSMutableArray *actions;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        actions = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 5; i++) {
+            NSMutableArray *colorSequence = [[NSMutableArray alloc] init];
+            for (int j = 0; j < 5; j++) {
+                [colorSequence addObject:[coloredTextures objectAtIndex: (i + j) % 5]];
+            }
+            [actions addObject:[SKAction repeatActionForever:[SKAction group:@[[SKAction animateWithTextures:colorSequence timePerFrame:1.5], [SKAction repeatAction:[SKAction sequence:@[[SKAction waitForDuration:1.5], [SKAction runBlock:^{
+                animatingIndex = (animatingIndex + 1);
+            }]]] count:5]]]]];
+        }
+    });
+    return (SKAction *)[actions objectAtIndex:arc4random_uniform(5)];
 }
 
 

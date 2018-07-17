@@ -7,10 +7,10 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "BrickColors.h"
+#import "Entity.h"
 
-@interface Bullet : SKSpriteNode
-- (instancetype) initRegularBulletWithPosition:(CGPoint)position withColorIndex:(int)index;
-- (instancetype) initMorphBulletWithPosition:(CGPoint)position withColorIndex:(int)index;
-- (int)getColorIndex;
+@interface Bullet : Entity
+@property (nonatomic, assign) CGVector velocity;
+- (instancetype) initRegularBulletWithColorIndex:(int)index;
+- (instancetype) initMorphBulletWithColorIndex:(int)index;
 @end

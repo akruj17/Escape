@@ -7,28 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A80C006A20E9A88300C4916A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A80C006920E9A88300C4916A /* Assets.xcassets */; };
+		A81ACCC020F5AFED00144E0A /* SettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = A81ACCBF20F5AFED00144E0A /* SettingsVC.m */; };
+		A81ACCC320F5BE3F00144E0A /* RestartView.m in Sources */ = {isa = PBXBuildFile; fileRef = A81ACCC220F5BE3F00144E0A /* RestartView.m */; };
 		A82250C520D4205300D80F9F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250C420D4205300D80F9F /* AppDelegate.m */; };
 		A82250C720D4205300D80F9F /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = A82250C620D4205300D80F9F /* GameScene.sks */; };
 		A82250C920D4205300D80F9F /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = A82250C820D4205300D80F9F /* Actions.sks */; };
 		A82250CC20D4205300D80F9F /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250CB20D4205300D80F9F /* GameScene.m */; };
 		A82250CF20D4205300D80F9F /* GameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250CE20D4205300D80F9F /* GameViewController.m */; };
 		A82250D220D4205300D80F9F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82250D020D4205300D80F9F /* Main.storyboard */; };
-		A82250D420D4205500D80F9F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A82250D320D4205500D80F9F /* Assets.xcassets */; };
 		A82250D720D4205500D80F9F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A82250D520D4205500D80F9F /* LaunchScreen.storyboard */; };
 		A82250DA20D4205500D80F9F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250D920D4205500D80F9F /* main.m */; };
 		A82250E320D4214A00D80F9F /* Shooter.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E220D4214A00D80F9F /* Shooter.m */; };
 		A82250E620D5F70300D80F9F /* Bullet.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E520D5F70300D80F9F /* Bullet.m */; };
 		A82250E920D61DEA00D80F9F /* Brick.m in Sources */ = {isa = PBXBuildFile; fileRef = A82250E820D61DEA00D80F9F /* Brick.m */; };
+		A87AB89020F485FB00EE7F57 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87AB88F20F485FB00EE7F57 /* GameKit.framework */; };
+		A8AA0F1F20EBFB6D00531D3B /* GameOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AA0F1E20EBFB6D00531D3B /* GameOverView.m */; };
 		A8AF64C220D9B2680079B112 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AF64C120D9B2680079B112 /* Constants.m */; };
 		A8AF64C620DC94160079B112 /* UIColor+ColorExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AF64C520DC94160079B112 /* UIColor+ColorExtensions.m */; };
 		A8AF64C920DC9B760079B112 /* BrickColors.m in Sources */ = {isa = PBXBuildFile; fileRef = A8AF64C820DC9B760079B112 /* BrickColors.m */; };
 		A8E9AD0E20E7F7E300E2885E /* BrickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E9AD0D20E7F7E300E2885E /* BrickManager.m */; };
+		A8E9AD1120E86F9500E2885E /* brickCollisionEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = A8E9AD1020E86F9500E2885E /* brickCollisionEffect.sks */; };
+		A8EE360520FD406300DA5B27 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EE360420FD406300DA5B27 /* Entity.m */; };
 		D8D1CA288D0FD11EB51786F8 /* libPods-Escape.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		569964110429E2BF954BFD39 /* Pods-Escape.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Escape.release.xcconfig"; path = "Pods/Target Support Files/Pods-Escape/Pods-Escape.release.xcconfig"; sourceTree = "<group>"; };
 		75BF4F3E3036EF67240AF3C5 /* Pods-Escape.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Escape.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Escape/Pods-Escape.debug.xcconfig"; sourceTree = "<group>"; };
+		A80C006920E9A88300C4916A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		A81ACCBE20F5AFED00144E0A /* SettingsVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsVC.h; sourceTree = "<group>"; };
+		A81ACCBF20F5AFED00144E0A /* SettingsVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsVC.m; sourceTree = "<group>"; };
+		A81ACCC120F5BE3F00144E0A /* RestartView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RestartView.h; sourceTree = "<group>"; };
+		A81ACCC220F5BE3F00144E0A /* RestartView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RestartView.m; sourceTree = "<group>"; };
 		A82250C020D4205300D80F9F /* Escape.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Escape.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82250C320D4205300D80F9F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A82250C420D4205300D80F9F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -39,7 +50,6 @@
 		A82250CD20D4205300D80F9F /* GameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameViewController.h; sourceTree = "<group>"; };
 		A82250CE20D4205300D80F9F /* GameViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameViewController.m; sourceTree = "<group>"; };
 		A82250D120D4205300D80F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A82250D320D4205500D80F9F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A82250D620D4205500D80F9F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A82250D820D4205500D80F9F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A82250D920D4205500D80F9F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -49,14 +59,22 @@
 		A82250E520D5F70300D80F9F /* Bullet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		A82250E720D61DEA00D80F9F /* Brick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brick.h; sourceTree = "<group>"; };
 		A82250E820D61DEA00D80F9F /* Brick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Brick.m; sourceTree = "<group>"; };
+		A87AB88C20F4472300EE7F57 /* GameOverProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameOverProtocol.h; sourceTree = "<group>"; };
+		A87AB88F20F485FB00EE7F57 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		A8AA0F1D20EBFB6D00531D3B /* GameOverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameOverView.h; sourceTree = "<group>"; };
+		A8AA0F1E20EBFB6D00531D3B /* GameOverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameOverView.m; sourceTree = "<group>"; };
 		A8AF64C120D9B2680079B112 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		A8AF64C320D9B27F0079B112 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		A8AF64C420DC94160079B112 /* UIColor+ColorExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorExtensions.h"; sourceTree = "<group>"; };
 		A8AF64C520DC94160079B112 /* UIColor+ColorExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorExtensions.m"; sourceTree = "<group>"; };
 		A8AF64C720DC9B760079B112 /* BrickColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrickColors.h; sourceTree = "<group>"; };
 		A8AF64C820DC9B760079B112 /* BrickColors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickColors.m; sourceTree = "<group>"; };
+		A8E795A220EC09D500220B05 /* AdProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdProtocol.h; sourceTree = "<group>"; };
 		A8E9AD0D20E7F7E300E2885E /* BrickManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickManager.m; sourceTree = "<group>"; };
 		A8E9AD0F20E7F7FC00E2885E /* BrickManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrickManager.h; sourceTree = "<group>"; };
+		A8E9AD1020E86F9500E2885E /* brickCollisionEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = brickCollisionEffect.sks; sourceTree = "<group>"; };
+		A8EE360320FD406300DA5B27 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
+		A8EE360420FD406300DA5B27 /* Entity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Escape.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -66,6 +84,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8D1CA288D0FD11EB51786F8 /* libPods-Escape.a in Frameworks */,
+				A87AB89020F485FB00EE7F57 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +94,7 @@
 		0E4FD69311D9AC179062F3DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A87AB88F20F485FB00EE7F57 /* GameKit.framework */,
 				DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */,
 			);
 			name = Frameworks;
@@ -110,8 +130,11 @@
 				A82250CB20D4205300D80F9F /* GameScene.m */,
 				A82250CD20D4205300D80F9F /* GameViewController.h */,
 				A82250CE20D4205300D80F9F /* GameViewController.m */,
+				A81ACCC120F5BE3F00144E0A /* RestartView.h */,
+				A81ACCC220F5BE3F00144E0A /* RestartView.m */,
 				A82250D020D4205300D80F9F /* Main.storyboard */,
-				A82250D320D4205500D80F9F /* Assets.xcassets */,
+				A81ACCBE20F5AFED00144E0A /* SettingsVC.h */,
+				A81ACCBF20F5AFED00144E0A /* SettingsVC.m */,
 				A82250D520D4205500D80F9F /* LaunchScreen.storyboard */,
 				A82250D820D4205500D80F9F /* Info.plist */,
 				A82250D920D4205500D80F9F /* main.m */,
@@ -123,6 +146,12 @@
 				A8AF64C820DC9B760079B112 /* BrickColors.m */,
 				A8E9AD0D20E7F7E300E2885E /* BrickManager.m */,
 				A8E9AD0F20E7F7FC00E2885E /* BrickManager.h */,
+				A8E9AD1020E86F9500E2885E /* brickCollisionEffect.sks */,
+				A80C006920E9A88300C4916A /* Assets.xcassets */,
+				A8AA0F1D20EBFB6D00531D3B /* GameOverView.h */,
+				A8AA0F1E20EBFB6D00531D3B /* GameOverView.m */,
+				A8E795A220EC09D500220B05 /* AdProtocol.h */,
+				A87AB88C20F4472300EE7F57 /* GameOverProtocol.h */,
 			);
 			path = Escape;
 			sourceTree = "<group>";
@@ -136,6 +165,8 @@
 				A82250E520D5F70300D80F9F /* Bullet.m */,
 				A82250E720D61DEA00D80F9F /* Brick.h */,
 				A82250E820D61DEA00D80F9F /* Brick.m */,
+				A8EE360320FD406300DA5B27 /* Entity.h */,
+				A8EE360420FD406300DA5B27 /* Entity.m */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -181,6 +212,11 @@
 				TargetAttributes = {
 					A82250BF20D4205300D80F9F = {
 						CreatedOnToolsVersion = 9.4;
+						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -208,9 +244,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A82250D220D4205300D80F9F /* Main.storyboard in Resources */,
+				A8E9AD1120E86F9500E2885E /* brickCollisionEffect.sks in Resources */,
 				A82250C720D4205300D80F9F /* GameScene.sks in Resources */,
-				A82250D420D4205500D80F9F /* Assets.xcassets in Resources */,
 				A82250D720D4205500D80F9F /* LaunchScreen.storyboard in Resources */,
+				A80C006A20E9A88300C4916A /* Assets.xcassets in Resources */,
 				A82250C920D4205300D80F9F /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -243,8 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8EE360520FD406300DA5B27 /* Entity.m in Sources */,
 				A82250CC20D4205300D80F9F /* GameScene.m in Sources */,
 				A82250E920D61DEA00D80F9F /* Brick.m in Sources */,
+				A81ACCC320F5BE3F00144E0A /* RestartView.m in Sources */,
+				A8AA0F1F20EBFB6D00531D3B /* GameOverView.m in Sources */,
 				A82250CF20D4205300D80F9F /* GameViewController.m in Sources */,
 				A8AF64C220D9B2680079B112 /* Constants.m in Sources */,
 				A82250E320D4214A00D80F9F /* Shooter.m in Sources */,
@@ -252,6 +292,7 @@
 				A8AF64C620DC94160079B112 /* UIColor+ColorExtensions.m in Sources */,
 				A8AF64C920DC9B760079B112 /* BrickColors.m in Sources */,
 				A82250C520D4205300D80F9F /* AppDelegate.m in Sources */,
+				A81ACCC020F5AFED00144E0A /* SettingsVC.m in Sources */,
 				A82250E620D5F70300D80F9F /* Bullet.m in Sources */,
 				A8E9AD0E20E7F7E300E2885E /* BrickManager.m in Sources */,
 			);
@@ -401,7 +442,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edumacation.Escape;
+				PRODUCT_BUNDLE_IDENTIFIER = com.edumacation.colorfulescape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -419,7 +460,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edumacation.Escape;
+				PRODUCT_BUNDLE_IDENTIFIER = com.edumacation.colorfulescape;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

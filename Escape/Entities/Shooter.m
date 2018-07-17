@@ -7,27 +7,39 @@
 //
 
 #import "Shooter.h"
+#import "Constants.h"
 
 @implementation Shooter {
+    SKSpriteNode *shooter;
 }
+
+static BOOL generatedTextures;
+static NSArray *coloredTextures;
 
 - (instancetype) initWithSize:(CGFloat)size {
     if (self = [super init]) {
-        //circle portion
-        SKShapeNode *circle = [SKShapeNode shapeNodeWithCircleOfRadius:size/2];
-        circle.fillColor = [UIColor blueColor];
-        circle.strokeColor = [UIColor blueColor];
-        circle.name = @"circle";
-        [self addChild:circle];
+        if (!generatedTextures) {
+            SKShapeNode *circle = [SKShapeNode shapeNodeWithCircleOfRadius:size/2];
+            coloredTextures = [self generateTextureArrayOfShape:circle];
+            generatedTextures = YES;
+        }
+        shooter = [SKSpriteNode spriteNodeWithTexture:[coloredTextures objectAtIndex:0]];
+        [self addChild:shooter];
+        self.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:size/2];
+        self.physicsBody.categoryBitMask = SHOOTER;
+        self.physicsBody.contactTestBitMask = BRICK;
+        self.physicsBody.collisionBitMask = BRICK;
+        self.physicsBody.dynamic = NO;
     }
     return self;
 }
 
-- (void)changeColorTo:(UIColor *)newColor {
-    SKShapeNode *circle = (SKShapeNode *)[self childNodeWithName:@"circle"];
-    circle.fillColor = newColor;
-    circle.strokeColor = newColor;
+
+- (void)changeColorTo:(int)newColorIndex {
+    shooter.texture = [coloredTextures objectAtIndex:newColorIndex];
+    self.colorIndex = newColorIndex;
 }
+
 
 
 @end

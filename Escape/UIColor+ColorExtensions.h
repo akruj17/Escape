@@ -17,5 +17,6 @@
 + (UIColor *)orangeBrickColor;
 + (UIColor *)grayLabelColor;
 + (UIColor *)grayBackgroundColor;
++ (UIColor *)redBackgroundColor;
 
 @end

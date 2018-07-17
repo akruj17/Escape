@@ -7,9 +7,9 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Entity.h"
 
-@interface Shooter : SKShapeNode
+@interface Shooter : Entity
 - (instancetype) initWithSize:(CGFloat)size;
-- (void)changeColorTo:(UIColor *)newColor;
-- (int)getColorIndex;
+- (void)changeColorTo:(int)newColorIndex;
 @end
