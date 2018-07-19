@@ -28,7 +28,6 @@
 - (SKAction *)bricksAlwaysRotating:(LayerNames)layer;
 - (void)unhideBricks;
 - (void)refreshBricks;
-- (void)removeInnerLayer;
 - (void)removeBrick:(Brick *)brick;
 - (int)numBricksWithColorIndex:(int)index;
 - (void)printNumBricks;

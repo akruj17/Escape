@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AdProtocol.h"
+#import "GameOverViewProtocol.h"
 
 @interface GameOverView : UIView
 - (instancetype)initWithFrame:(CGRect)frame belowLayer:(CALayer *)layer;
-@property (nonatomic, weak) id<AdPresenterProtocol> delegate;
+@property (nonatomic, weak) id<GameOverViewProtocol> delegate;
 - (void) presentWithoutAnimation;
 - (void) presentWithAnimation;
-
+- (void) resetProperties;
+- (void)pauseAnimation;
+-(void)resumeAnimation;
 @end

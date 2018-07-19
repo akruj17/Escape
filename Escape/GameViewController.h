@@ -11,5 +11,5 @@
 #import <GameplayKit/GameplayKit.h>
 
 @interface GameViewController : UIViewController
-
+- (void)pauseGame;
 @end

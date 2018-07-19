@@ -7,11 +7,15 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
-#import "GameOverProtocol.h"
+#import "GameSceneProtocol.h"
+#import "Constants.h"
 
 @interface GameScene : SKScene
-@property (nonatomic, weak) id<GameOverProtocol> gameOverDelegate;
+@property (nonatomic, weak) id<GameSceneProtocol> gameDelegate;
 - (void)transitionToHomeMode;
+- (void)transitionToGameMode;
+- (void)transitionToPauseMode;
 - (void)setUpCurrentGame;
 - (void)startSecondChanceGame;
+- (int)getCurrentMode;
 @end

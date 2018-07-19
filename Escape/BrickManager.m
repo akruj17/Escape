@@ -186,6 +186,7 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
             [gameLayer addChild:brick];
         }
     }
+    [colorsCount addObject:@(NUM_BRICKS_PER_LAYER * (NUM_LAYERS - 1))];
 }
 
 - (void)refreshBricks {
@@ -254,6 +255,7 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
                     [layer removeFromSuperlayer];
                     if (!([self->gameLayer childNodeWithName:[NSString stringWithFormat:@"brick%i", i]] || [self->gameLayer childNodeWithName:[NSString stringWithFormat:@"brick%i", i + 16]])) {
                         [self->colorsCount setObject:@([[self->colorsCount objectAtIndex:color] intValue] + 1) atIndexedSubscript:color];
+                        [self->colorsCount setObject:@([[self->colorsCount objectAtIndex:NUM_BRICK_COLORS] intValue] + 1) atIndexedSubscript:NUM_BRICK_COLORS];
                     }
                 }]]]];
             newBrick.zPosition = 30;
@@ -281,15 +283,6 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
     [brick removeFromParent];
 }
 
-- (void)removeInnerLayer {
-    for (int i = 0; i < NUM_BRICKS_PER_LAYER; i++) {
-        Brick *b = (Brick *)[gameLayer childNodeWithName:[NSString stringWithFormat:@"brick%i", (INNER * NUM_BRICKS_PER_LAYER) + i]];
-        if (b) {
-            [self breakBlock:b];
-        }
-    }
-}
-
 // special round action that randomly changes the colors of the bricks in a particular layer. Not really random tho, just
 // iterate over the colors in the specific order and wrap around if necessary. If the player is smart, they will catch this.
 - (SKAction *)changeBrickColorsRound:(LayerNames)layer {
@@ -298,7 +291,7 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
     for (int i = 0; i < [bricks count]; i++) {
         [actions addObject:[SKAction runAction:[[Brick class] iterateThroughColors] onChildWithName:[NSString stringWithFormat:@"brick%i", (16 * layer) + i]]];
     }
-    return [SKAction group:actions];
+    return [SKAction runAction:[SKAction group:actions] onChildWithName:gameLayer.name];
 }
 
 // special round action that has two opposite sides of a particular layer switch their bricks.
@@ -323,7 +316,7 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
         [actions addObject:[SKAction waitForDuration:6.0]];
         sideToSwitch = sideToSwitch <= 0;
     }
-    return [SKAction sequence:actions];
+    return [SKAction runAction:[SKAction sequence:actions] onChildWithName:gameLayer.name];
 }
 
 // special round action that hides random bricks of a particular layer for 3 seconds at a time.
@@ -339,7 +332,7 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
         [actions addObject:[SKAction waitForDuration:2.1]];
         timeElapsed += 2.1;
     }
-    return [SKAction sequence:actions];
+    return [SKAction runAction:[SKAction sequence:actions] onChildWithName:gameLayer.name];;
 }
 
 // special round action that move the bricks of a particular layer around its rectangular layer
@@ -379,11 +372,11 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
         int startIndex = (endOrderIndices[currIndex] - 1) % 4;
         if (startIndex < 0) { startIndex += 4;}
         SKAction *end = [SKAction moveTo:brickStartPos duration:CGPointDistBetweenPoints([[startPoints objectAtIndex:startIndex] CGPointValue], brickStartPos) / velocity];
-        SKAction *result = [SKAction runAction:[SKAction sequence:@[modify, [SKAction sequence:borderActions], end]] onChildWithName:[NSString stringWithFormat:@"brick%i", (layer * NUM_BRICKS_PER_LAYER) + i]];
+        SKAction *result = [SKAction runAction:[SKAction sequence:@[modify, [SKAction sequence:borderActions], end, modify, [SKAction sequence:borderActions], end]] onChildWithName:[NSString stringWithFormat:@"brick%i", (layer * NUM_BRICKS_PER_LAYER) + i]];
         [finalResult addObject:result];
         changeBorder = --numBricksPerIndex[currIndex] == 0;
     }
-    return [SKAction sequence:finalResult];
+    return [SKAction runAction:[SKAction sequence:finalResult] onChildWithName:gameLayer.name];
 }
 
 - (void)removeBrick:(Brick *)brick {
@@ -398,10 +391,14 @@ static inline float CGPointDistBetweenPoints(const CGPoint a, const CGPoint b) {
             [colorsCount setObject:@([[colorsCount objectAtIndex:[b getColorIndex]] intValue] + 1) atIndexedSubscript:[b getColorIndex]];
         }
     }
+    [colorsCount setObject:@([[colorsCount objectAtIndex:NUM_BRICK_COLORS] intValue] - 1) atIndexedSubscript:NUM_BRICK_COLORS];
 }
 
 - (int)numBricksWithColorIndex:(int)index {
-    return [[colorsCount objectAtIndex:index] intValue];
+    if ([[colorsCount objectAtIndex:NUM_BRICK_COLORS] intValue] > 0) {
+        return [[colorsCount objectAtIndex:index] intValue];
+    }
+    return - 1;
 }
 
 @end

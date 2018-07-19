@@ -28,7 +28,6 @@
 }
 
 - (int)getColorIndex {
-    NSLog(@"GOjijijG");
     return self.colorIndex;
 }
 

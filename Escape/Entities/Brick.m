@@ -14,7 +14,6 @@
 static BOOL generatedTextures;
 static NSArray *fragmentTextures;
 static NSArray *coloredTextures;
-static int animatingIndex;
 
 - (instancetype)initWithPosition:(CGPoint)position height:(float)height withColorIndex:(int)index {
     if (self = [super init]) {
@@ -56,7 +55,7 @@ static int animatingIndex;
     return [fragmentTextures objectAtIndex:self.colorIndex];
 }
 
-+ (SKAction *)iterateThroughColors { //total frame time 7.5 seconds
++ (SKAction *)iterateThroughColors { //total frame time 10 seconds
     static NSMutableArray *actions;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -66,9 +65,7 @@ static int animatingIndex;
             for (int j = 0; j < 5; j++) {
                 [colorSequence addObject:[coloredTextures objectAtIndex: (i + j) % 5]];
             }
-            [actions addObject:[SKAction repeatActionForever:[SKAction group:@[[SKAction animateWithTextures:colorSequence timePerFrame:1.5], [SKAction repeatAction:[SKAction sequence:@[[SKAction waitForDuration:1.5], [SKAction runBlock:^{
-                animatingIndex = (animatingIndex + 1);
-            }]]] count:5]]]]];
+            [actions addObject:[SKAction repeatAction:[SKAction animateWithTextures:colorSequence timePerFrame:2] count:(SECS_PER_ROUND - 5) / 10]];
         }
     });
     return (SKAction *)[actions objectAtIndex:arc4random_uniform(5)];

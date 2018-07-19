@@ -11,6 +11,7 @@
 @interface SettingsVC ()
 
 - (IBAction)backButtonPressed:(id)sender;
+@property (weak, nonatomic) IBOutlet UISwitch *soundsSwitch;
 
 
 @end
@@ -19,7 +20,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    [_soundsSwitch setOn:[preferences boolForKey:@"playAudio"]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +40,10 @@
 */
 
 - (IBAction)backButtonPressed:(id)sender {
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    [preferences setBool:_soundsSwitch.isOn forKey:@"playAudio"];
+    [preferences synchronize];
     [self dismissViewControllerAnimated:NO completion:nil];
 }
+
 @end

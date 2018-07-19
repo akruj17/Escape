@@ -28,10 +28,12 @@
     int score, currentColorIndex, roundNum;
     int numBricksPerLayer[NUM_LAYERS];
     BrickManager *manager;
-    SKAction *transitionAnimation, *addMorphAction;
+    SKAction *transitionAnimation, *addMorphAction, *brickPopSound;
     NSMutableArray *specialActions, *threadActions;
     Modes currMode;
     SKNode *homeLayer, *pauseLayer, *gameLayer;
+    SKAudioNode *brickCollisionSound;
+    BOOL playAudio;
 }
 
 - (instancetype)initWithSize:(CGSize)size {
@@ -50,6 +52,10 @@
         [self setUpCurrentGame];
         [self transitionToHomeMode];
         _colorInterval = 4.01;
+        brickPopSound = [SKAction playSoundFileNamed:@"pop.wav" waitForCompletion:NO];
+        brickCollisionSound = [[SKAudioNode alloc] initWithFileNamed:@"brickCollision.m4a"];
+        brickCollisionSound.autoplayLooped = NO;
+        [self addChild:brickCollisionSound];
     }
     return self;
 }
@@ -63,25 +69,16 @@
         if ([itemTapped isEqualToString:@"play"]) {
             [self transitionToGameMode];
         } else if ([itemTapped isEqualToString:@"leaderboard"]) {
-            [_gameOverDelegate leaderBoardClicked];
+            [_gameDelegate leaderBoardClicked];
         } else if ([itemTapped isEqualToString:@"settings"]) {
-            [_gameOverDelegate settingsClicked];
+            [_gameDelegate settingsClicked];
         }
     } else if (currMode == GAME_ABOUT_TO_START) {
+        _timeSinceRoundStart = _lastUpdateTime = 0;
         currMode = GAME_PLAY;
     } else if (currMode == GAME_PLAY) {
         if ([[self nodeAtPoint:curr].name isEqualToString:@"pauseBtn"]) {
-            [self addChild:pauseLayer];
-            currMode = GAME_PAUSED;
-            [self enumerateChildNodesWithName:@"bullet" usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
-                ((Bullet *)node).velocity = node.physicsBody.velocity;
-                node.physicsBody.velocity = CGVectorMake(0, 0);
-            }];
-        } else {
-            NSArray *childs = [gameLayer children];
-            for (int i = 0; i < [childs count]; i++) {
-                NSLog(@"%@", ((SKNode *)[childs objectAtIndex:i]).name);
-            }
+            [self transitionToPauseMode];
         }
     } else if (currMode == GAME_PAUSED) {
         [pauseLayer removeFromParent];
@@ -105,29 +102,31 @@
             [shooter changeColorTo:currentColorIndex];
             _colorInterval = 0;
         }
-        if (_bulletInterval > 0.15) { //add new regular bullet
+        if (_bulletInterval > 0.10) { //add new regular bullet
             _bulletInterval = 0;
             Bullet *bullet = [[Bullet alloc] initRegularBulletWithColorIndex:currentColorIndex];
             bullet.position = center;
-            bullet.physicsBody.velocity = CGVectorMake(150 * cos(shooter.zRotation + M_PI_2), 150 * sin(shooter.zRotation + M_PI_2));
+            bullet.physicsBody.velocity = CGVectorMake(180 * cos(shooter.zRotation + M_PI_2), 180 * sin(shooter.zRotation + M_PI_2));
             [self addChild:bullet];
         }
         if (currMode == GAME_PLAY) {
             _timeSinceRoundStart += _dt;
-            int timePassed = (int)(_timeSinceRoundStart / 1);
+            int timePassed = (_timeSinceRoundStart / 1);
             timeLbl.text = [NSString stringWithFormat:@"%i", SECS_PER_ROUND - timePassed];
             if (timePassed == SECS_PER_ROUND) {
                 currMode = GAME_STOPPED;
                 if (numBricksPerLayer[INNER] > 0) {
-                    [self runAction:manager.inwardBricksCollideAction];
-                    [_gameOverDelegate presentGameOverViewWithScore:score];
+                    if (playAudio) {
+                        [brickCollisionSound runAction:[SKAction sequence:@[[SKAction group:@[[SKAction play], [SKAction changeVolumeTo:0.0 duration:1.5]]], [SKAction stop], [SKAction changeVolumeTo:1.0 duration:0.0]]]];
+                    }
+                    [self runAction:[SKAction sequence:@[[SKAction runAction:manager.inwardBricksCollideAction onChildWithName:@"gameLayer"], [SKAction waitForDuration:1.0], [SKAction runBlock:^{
+                        [self->_gameDelegate moveToGameOverWithScore:self->score];
+                    }]]]];
                 } else {
-                [manager removeInnerLayer];
                     [self transitionToNextRound];
                 }
             }
         }
-       
     }
 }
 
@@ -145,7 +144,10 @@
                     int layerNum = [[brick.name substringFromIndex:5] intValue] / 16;
                     numBricksPerLayer[layerNum]--;
                     [manager removeBrick:brick];
-                    scoreLbl.text = [NSString stringWithFormat:@"%i", ++score];
+                    [scoreLbl setText:[NSString stringWithFormat:@"%i", ++score]];
+                    if (playAudio) {
+                        [self runAction:brickPopSound];
+                    }
                 }
             }
         } else {
@@ -164,15 +166,14 @@
 }
 
 - (void)setUpCurrentGame {
-    _timeSinceRoundStart = _lastUpdateTime = 0;
-    timeLbl.text = [NSString stringWithFormat:@"%i", SECS_PER_ROUND];
     scoreLbl.text = [NSString stringWithFormat:@"%i", 0];
-    roundNum = 0;
+    roundNum = 5;
     numBricksPerLayer[OUTER] = numBricksPerLayer[MIDDLE] = 16;
     numBricksPerLayer[INNER] = 0;
     specialActions = [[NSMutableArray alloc] init];
     threadActions = [[NSMutableArray alloc] init];
-    [manager addBeginningBricksAtPoints];
+    [manager refreshBricks];
+
 }
 
 - (void)transitionToNextRound {
@@ -269,7 +270,6 @@
     for (int i = 0; i < [namesAndPos count] / 3; i++) {
         SKLabelNode *label = [SKLabelNode labelNodeWithText:[namesAndPos objectAtIndex:(3 * i)]];
         label.fontSize = [[namesAndPos objectAtIndex:(3 * i) + 1] floatValue];
-        label.numberOfLines = 2;
         label.fontName = @"HelveticaNeue-UltraLight";
         SKTexture *texture = [[SKView new] textureFromNode:label];
         texture.filteringMode = SKTextureFilteringNearest;
@@ -319,19 +319,19 @@
     gameLayer.name = @"gameLayer";
     scoreLbl = [SKLabelNode labelNodeWithFontNamed:@"HelveticaNeue-UltraLight"];
     scoreLbl.fontSize = 50.0;
-    scoreLbl.position = CGPointMake(0.5 * self.size.width, 0.93 * self.size.height);
+    scoreLbl.position = CGPointMake(0.5 * self.size.width, 0.91 * self.size.height);
     scoreLbl.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeCenter;
     scoreLbl.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     [gameLayer addChild:scoreLbl];
     timeLbl = [SKLabelNode labelNodeWithFontNamed:@"HelveticaNeue-UltraLight"];
     timeLbl.fontSize = 60.0;
-    timeLbl.position = CGPointMake(0.90 * self.size.width, (0.93 * self.size.height));
+    timeLbl.position = CGPointMake(0.90 * self.size.width, (0.91 * self.size.height));
     timeLbl.horizontalAlignmentMode = SKLabelHorizontalAlignmentModeRight;
     timeLbl.verticalAlignmentMode = SKLabelVerticalAlignmentModeCenter;
     [gameLayer addChild:timeLbl];
     SKSpriteNode *pauseBtn = [SKSpriteNode spriteNodeWithTexture:[SKTexture textureWithImageNamed:@"pause"]];
     pauseBtn.size = CGSizeMake(0.1 * self.size.width, 0.1 * self.size.width);
-    pauseBtn.position = CGPointMake(0.1 * self.size.width, (0.93 * self.size.height) - (pauseBtn.size.height / 2));
+    pauseBtn.position = CGPointMake(0.1 * self.size.width, (0.91 * self.size.height) - (pauseBtn.size.height / 2));
     pauseBtn.anchorPoint = CGPointZero;
     pauseBtn.name = @"pauseBtn";
     [gameLayer addChild:pauseBtn];
@@ -356,6 +356,10 @@
     [self addChild:gameLayer];
     currMode = GAME_ABOUT_TO_START;
     [self removeAllBullets];
+    // set up sound files here, because the user might change the option between games
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    playAudio = (BOOL)[preferences boolForKey:@"playAudio"];
+ 
 }
 
 - (void)removeAllBullets {
@@ -367,8 +371,22 @@
 
 // after watching an ad, the player can continue the game
 - (void)startSecondChanceGame {
-    [manager removeInnerLayer];
-    _timeSinceRoundStart = _lastUpdateTime = 0;
+    currMode = GAME_ABOUT_TO_START;
+    [self transitionToNextRound];
+}
+
+- (int)getCurrentMode {
+    return currMode;
+}
+
+- (void)transitionToPauseMode {
+    [self addChild:pauseLayer];
+    currMode = GAME_PAUSED;
+    [self enumerateChildNodesWithName:@"bullet" usingBlock:^(SKNode * _Nonnull node, BOOL * _Nonnull stop) {
+        ((Bullet *)node).velocity = node.physicsBody.velocity;
+        node.physicsBody.velocity = CGVectorMake(0, 0);
+    }];
+    _lastUpdateTime = 0;
 }
 
 @end

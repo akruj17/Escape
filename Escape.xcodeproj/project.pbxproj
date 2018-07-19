@@ -29,6 +29,9 @@
 		A8E9AD0E20E7F7E300E2885E /* BrickManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A8E9AD0D20E7F7E300E2885E /* BrickManager.m */; };
 		A8E9AD1120E86F9500E2885E /* brickCollisionEffect.sks in Resources */ = {isa = PBXBuildFile; fileRef = A8E9AD1020E86F9500E2885E /* brickCollisionEffect.sks */; };
 		A8EE360520FD406300DA5B27 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = A8EE360420FD406300DA5B27 /* Entity.m */; };
+		A8EE36092100D34900DA5B27 /* pop.wav in Resources */ = {isa = PBXBuildFile; fileRef = A8EE36082100D34900DA5B27 /* pop.wav */; };
+		A8EE360B2100D5FB00DA5B27 /* brickCollision.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = A8EE360A2100D5FB00DA5B27 /* brickCollision.mp3 */; };
+		A8EE360D2100DA4400DA5B27 /* brickCollision.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A8EE360C2100DA4300DA5B27 /* brickCollision.m4a */; };
 		D8D1CA288D0FD11EB51786F8 /* libPods-Escape.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +62,6 @@
 		A82250E520D5F70300D80F9F /* Bullet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bullet.m; sourceTree = "<group>"; };
 		A82250E720D61DEA00D80F9F /* Brick.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Brick.h; sourceTree = "<group>"; };
 		A82250E820D61DEA00D80F9F /* Brick.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Brick.m; sourceTree = "<group>"; };
-		A87AB88C20F4472300EE7F57 /* GameOverProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameOverProtocol.h; sourceTree = "<group>"; };
 		A87AB88F20F485FB00EE7F57 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		A8AA0F1D20EBFB6D00531D3B /* GameOverView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameOverView.h; sourceTree = "<group>"; };
 		A8AA0F1E20EBFB6D00531D3B /* GameOverView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameOverView.m; sourceTree = "<group>"; };
@@ -69,12 +71,16 @@
 		A8AF64C520DC94160079B112 /* UIColor+ColorExtensions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorExtensions.m"; sourceTree = "<group>"; };
 		A8AF64C720DC9B760079B112 /* BrickColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrickColors.h; sourceTree = "<group>"; };
 		A8AF64C820DC9B760079B112 /* BrickColors.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickColors.m; sourceTree = "<group>"; };
-		A8E795A220EC09D500220B05 /* AdProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdProtocol.h; sourceTree = "<group>"; };
 		A8E9AD0D20E7F7E300E2885E /* BrickManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BrickManager.m; sourceTree = "<group>"; };
 		A8E9AD0F20E7F7FC00E2885E /* BrickManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BrickManager.h; sourceTree = "<group>"; };
 		A8E9AD1020E86F9500E2885E /* brickCollisionEffect.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = brickCollisionEffect.sks; sourceTree = "<group>"; };
 		A8EE360320FD406300DA5B27 /* Entity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		A8EE360420FD406300DA5B27 /* Entity.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
+		A8EE360620FE986700DA5B27 /* GameOverViewProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameOverViewProtocol.h; sourceTree = "<group>"; };
+		A8EE360720FFED8300DA5B27 /* GameSceneProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameSceneProtocol.h; sourceTree = "<group>"; };
+		A8EE36082100D34900DA5B27 /* pop.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop.wav; sourceTree = "<group>"; };
+		A8EE360A2100D5FB00DA5B27 /* brickCollision.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = brickCollision.mp3; sourceTree = "<group>"; };
+		A8EE360C2100DA4300DA5B27 /* brickCollision.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = brickCollision.m4a; sourceTree = "<group>"; };
 		DD592CA26A4C1C290D5C8EE9 /* libPods-Escape.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Escape.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -150,8 +156,11 @@
 				A80C006920E9A88300C4916A /* Assets.xcassets */,
 				A8AA0F1D20EBFB6D00531D3B /* GameOverView.h */,
 				A8AA0F1E20EBFB6D00531D3B /* GameOverView.m */,
-				A8E795A220EC09D500220B05 /* AdProtocol.h */,
-				A87AB88C20F4472300EE7F57 /* GameOverProtocol.h */,
+				A8EE360620FE986700DA5B27 /* GameOverViewProtocol.h */,
+				A8EE360720FFED8300DA5B27 /* GameSceneProtocol.h */,
+				A8EE36082100D34900DA5B27 /* pop.wav */,
+				A8EE360A2100D5FB00DA5B27 /* brickCollision.mp3 */,
+				A8EE360C2100DA4300DA5B27 /* brickCollision.m4a */,
 			);
 			path = Escape;
 			sourceTree = "<group>";
@@ -246,9 +255,12 @@
 				A82250D220D4205300D80F9F /* Main.storyboard in Resources */,
 				A8E9AD1120E86F9500E2885E /* brickCollisionEffect.sks in Resources */,
 				A82250C720D4205300D80F9F /* GameScene.sks in Resources */,
+				A8EE36092100D34900DA5B27 /* pop.wav in Resources */,
+				A8EE360D2100DA4400DA5B27 /* brickCollision.m4a in Resources */,
 				A82250D720D4205500D80F9F /* LaunchScreen.storyboard in Resources */,
 				A80C006A20E9A88300C4916A /* Assets.xcassets in Resources */,
 				A82250C920D4205300D80F9F /* Actions.sks in Resources */,
+				A8EE360B2100D5FB00DA5B27 /* brickCollision.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
